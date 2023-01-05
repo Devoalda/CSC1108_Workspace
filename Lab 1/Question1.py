@@ -1,5 +1,3 @@
-#
-
 def largest(arr):
     biggest = arr[0]
     i = 0
