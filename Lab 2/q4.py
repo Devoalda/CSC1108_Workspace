@@ -23,6 +23,7 @@ class SinglyLinkedList:
             print('Error: invalid index')
         else:
             return temp
+
     def insert(self, node, index):
         if index == 0:
             self.insertAtHead(node)
@@ -31,6 +32,7 @@ class SinglyLinkedList:
             if temp is not None:
                 node.next = temp.next
                 temp.next = node
+
     def insertAtHead(self, node):
         if self.head is None:
             self.head = node
@@ -88,7 +90,7 @@ class SinglyLinkedList:
         while temp is not None:
             output += str(temp.data) + " "
             temp = temp.next
-        output += " ]"
+        output += "]"
         print(output)
 
     # return the number of elements in the queue
@@ -100,21 +102,38 @@ class SinglyLinkedList:
             temp = temp.next
         return size
 
-
-def mergeList(list1, list2):
-    mergedList = SinglyLinkedList()
-
-    # Merge and sort list
-    for i in range(list1.size()):
-        if mergedList.search(list1.search(i).data) is None:
-            mergedList.insert(SinglyListNode(list1.search(i).data), mergedList.size())
-        elif list1.search(i).data < mergedList.search(list1.search(i).data).data:
-            mergedList.insert(SinglyListNode(list1.search(i).data), mergedList.size())
-
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current is not None:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
 
 
+def mergesort(list1, list2):
+    merged_list = SinglyLinkedList()
+
+    while list1.head is not None and list2.head is not None:
+        if int(list1.head.data) < int(list2.head.data):
+            merged_list.insertAtHead(SinglyListNode(list1.head.data))
+            list1.deleteAtHead()
+        else:
+            merged_list.insertAtHead(SinglyListNode(list2.head.data))
+            list2.deleteAtHead()
+    while list1.head is not None:
+        merged_list.insertAtHead(SinglyListNode(list1.head.data))
+        list1.deleteAtHead()
+
+    while list2.head is not None:
+        merged_list.insertAtHead(SinglyListNode(list2.head.data))
+        list2.deleteAtHead()
+
+    merged_list.reverse()
     print("Content of merged list")
-    mergedList.printList()
+    merged_list.printList()
 
 
 def reverse(array):
@@ -124,7 +143,7 @@ def reverse(array):
     return reversed_array
 
 
-array1 = input("Enter a list of numbers in descending order for list 1 seperated by commas:")
+array1 = input("Enter a list of numbers in descending order for list 1 separated by commas:")
 array1 = [x for x in array1.split(",")]
 array1 = reverse(array1)
 list1 = SinglyLinkedList()
@@ -133,16 +152,16 @@ list2 = SinglyLinkedList()
 for n in array1:
     list1.insertAtHead(SinglyListNode(n))
 
-array2 = input("\nEnter a list of numbers in descending order for list 2 seperated by commas:")
+array2 = input("\nEnter a list of numbers in descending order for list 2 separated by commas:")
 array2 = [x for x in array2.split(",")]
 array2 = reverse(array2)
 
 for n in array2:
     list2.insertAtHead(SinglyListNode(n))
 
-print("Content of list1")
+print("\nContent of list 1")
 list1.printList()
 
 print("Content of list 2")
 list2.printList()
-mergeList(list1, list2)
+mergesort(list1, list2)
