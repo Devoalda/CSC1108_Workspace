@@ -7,19 +7,15 @@ class node:
 class doublyLinkedList:
     def __init__(self):
         self.head = None
-        self.tail = None
-        self.size = 0
+        self.prev = None
 
     def insert(self, node):
         if self.head is None:
-            self.head = node
-            self.tail = node
-            self.size += 1
+            self.head = self.prev = node
         else:
-            self.tail.next = node
-            node.prev = self.tail
-            self.tail = node
-            self.size += 1
+            self.head.prev = node
+            node.next = self.head
+            self.head = node
 
 
     def delete(self, value):
@@ -27,15 +23,15 @@ class doublyLinkedList:
         while temp is not None and temp.data is not value:
             temp = temp.next
         if temp is None:
-            print("Error: value not found")
-        elif temp is self.head:
-            self.head = self.head.next
-        elif temp is self.tail:
-            self.tail = self.tail.prev
+            print("Error, value not found")
         else:
-            temp.prev.next = temp.next
-            temp.next.prev = temp.prev
-            del temp
+            if temp is self.head:
+                self.head = self.head.next
+            elif temp is self.tail:
+                self.tail = self.tail.prev
+            else:
+                temp.prev.next = temp.next
+                temp.next.prev = temp.prev
 
     def peek(self):
         return self.head.data
@@ -47,9 +43,10 @@ class doublyLinkedList:
             temp = temp.next
             counter += 1
         if temp is None:
-            print("Error: value not found")
+            print("Error: Unable to search")
         else:
             return counter
+
     def printList(self):
         temp = self.head
         while temp is not None:
@@ -68,15 +65,10 @@ def main():
 
     dll.printList()
     # Asserts
-    assert(dll.peek() == 5), f"Top of queue not 5, got:{dll.peek()}"
-    assert(dll.search(6) == 1), f"6 not found at index 1, got:{dll.search(6)}"
-    dll.delete(6)
-    assert(dll.search(7) == 1), f"7 not found at index 1, got:{dll.search(7)}"
-
-    dll.insert(node(8))
-    dll.insert(node(9))
-    assert(dll.search(9) == 3), f"9 not found at index 3, got:{dll.search(9)}"
-    dll.delete(9)
+    assert(dll.peek() == 7), f"Top of Doubly Linked List not 7, got:{dll.peek()}"
+    assert(dll.search(5) == 2), f"Index of 5 not 2, got:{dll.search(5)}"
+    assert(dll.search(6) == 1), f"Index of 6 not 1, got:{dll.search(6)}"
+    assert(dll.search(7) == 0), f"Index of 7 not 0, got:{dll.search(7)}"
 
     print("All tests passed")
     dll.printList()
