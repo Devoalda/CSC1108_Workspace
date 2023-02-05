@@ -16,10 +16,10 @@ class Stack:
         return value
 
     def peek(self):
-        if len(self.data) != 0 or self.top != -1:
+        if self.top != -1 and self.data is not None:
             return self.data[self.top]
         else:
-            return "Stack is empty"
+            return "Empty Stack"
     def printStack(self):
         print(self.data)
 

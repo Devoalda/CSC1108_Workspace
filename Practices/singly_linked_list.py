@@ -30,16 +30,18 @@ class SinglyLinkedList:
 
     def searchValue(self, value):
         temp = self.head
-        prev = None
+        #prev = None
         counter = 0
-        while temp is not None:
-            if temp.data == value:
-                return counter
-            else:
-                prev = temp
-                temp = temp.next
-                counter += 1
 
+        while temp is not None and temp.data != value:
+            #prev = temp
+            temp = temp.next
+            counter += 1
+
+        if temp is None:
+            print("Not Found")
+        elif temp.data == value:
+            return counter
     def delete(self, value):
         temp = self.head
         prev = None
@@ -69,7 +71,10 @@ class SinglyLinkedList:
     def printList(self):
         temp = self.head
         while temp is not None:
-            print("[", temp.data, "]", end=" ")
+            if temp.next is None:
+                print(temp.data)
+            else:
+                print(temp.data, end=" -> ")
             temp = temp.next
 
 
