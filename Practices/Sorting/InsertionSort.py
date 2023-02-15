@@ -8,11 +8,12 @@ def insertionSort(a):
             position -= 1
         a[position] = currentValue
 
-        print(a)
+    return a
 
 
 array = [4, 2, 5, 9, 1, 3, 6, 8, 7]
 insertionSort(array)
+print(array)
 
 # Output
 # [2, 4, 5, 9, 1, 3, 6, 8, 7]

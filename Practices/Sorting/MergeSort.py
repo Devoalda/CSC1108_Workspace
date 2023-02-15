@@ -24,6 +24,7 @@ def merge(array1, array2):
 
 def mergeSort(array):
     size = len(array)
+
     if size <= 1:
         return array
 

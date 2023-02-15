@@ -1,16 +1,11 @@
-
 def bubbleSort(a):
-    count = 0
-    for item in range(0, len(a)):
-        for i in range(0, len(a) - 1):
-            if a[i] > a[i + 1]:
-                a[i], a[i + 1] = a[i + 1], a[i]
+    for i in range(len(a)):
+        # -i because the last i elements are already sorted
+        # -1 because we compare j and j+1
+        for j in range(len(a) - i - 1):
+            if a[j] > a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
 
-            print(a)
-
-    print("Number of swap for each item:", count)
-
-
-
-array = [9,8,7,6,5,4,3,2,1]
+array = [3,4,2,9,5,1,6]
 bubbleSort(array)
+print(array)
