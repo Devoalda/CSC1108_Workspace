@@ -33,7 +33,8 @@ def mergeSort(array):
     left = mergeSort(array[:mid])
     right = mergeSort(array[mid:])
 
-    return merge(left, right)
+    #return merge(left, right)
+    return merge1(left, right)
 
 
 array = [4, 2, 5, 9, 1, 3, 6, 8, 7]
